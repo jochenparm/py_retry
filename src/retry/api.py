@@ -53,11 +53,7 @@ def __retry_internal(
             time.sleep(_delay)
             _delay *= backoff
 
-            if isinstance(jitter, tuple):
-                _delay += random.uniform(*jitter)
-            else:
-                _delay += jitter
-
+            _delay += random.uniform(*jitter) if isinstance(jitter, tuple) else jitter
             if max_delay:
                 _delay = min(_delay, max_delay)
 
