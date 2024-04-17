@@ -4,7 +4,7 @@ import time
 from functools import partial
 from typing import Any, Callable, Optional, Union
 
-from .compat import decorator
+from .decorator import decorator
 
 logging_logger = logging.getLogger(__name__)
 formatter = "%(asctime)s - %(name)s - L%(lineno)d - %(levelname)s - %(message)s"
