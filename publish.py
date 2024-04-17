@@ -1,12 +1,10 @@
 import os
 import sys
-
 from os.path import dirname, realpath
 from pathlib import Path
 from shutil import rmtree
 
 import toml
-
 
 PROJECT_ROOT = dirname(realpath(__file__))
 
