@@ -96,16 +96,16 @@ class FunctionMaker:
                 allargs = list(self.args)
                 allshortargs = list(self.args)
                 if self.varargs:
-                    allargs.append("*" + self.varargs)
-                    allshortargs.append("*" + self.varargs)
+                    allargs.append(f"*{self.varargs}")
+                    allshortargs.append(f"*{self.varargs}")
                 elif self.kwonlyargs:
                     allargs.append("*")  # single star syntax
                 for a in self.kwonlyargs:
-                    allargs.append("%s=None" % a)
+                    allargs.append(f"{a}=None")
                     allshortargs.append(f"{a}={a}")
                 if self.varkw:
-                    allargs.append("**" + self.varkw)
-                    allshortargs.append("**" + self.varkw)
+                    allargs.append(f"**{self.varkw}")
+                    allshortargs.append(f"**{self.varkw}")
                 self.signature = ", ".join(allargs)
                 self.shortsignature = ", ".join(allshortargs)
                 self.dict = func.__dict__.copy()
@@ -125,7 +125,7 @@ class FunctionMaker:
         # check existence required attributes
         assert hasattr(self, "name")
         if not hasattr(self, "signature"):
-            raise TypeError("You are decorating a non function: %s" % func)
+            raise TypeError(f"You are decorating a non function: {func}")
 
     def update(self, func, **kw):
         """
@@ -210,7 +210,7 @@ class FunctionMaker:
             signature = None
             func = obj
         self = cls(func, name, signature, defaults, doc, module)
-        ibody = "\n".join("    " + line for line in body.splitlines())
+        ibody = "\n".join(f"    {line}" for line in body.splitlines())
         caller = evaldict.get("_call_")  # when called from `decorate`
         if caller and iscoroutinefunction(caller):
             body = ("async def %(name)s(%(signature)s):\n" + ibody).replace(
@@ -389,7 +389,7 @@ def dispatch_on(*dispatch_args):
     dispatching on the given arguments.
     """
     assert dispatch_args, "No dispatch args passed"
-    dispatch_str = "(%s,)" % ", ".join(dispatch_args)
+    dispatch_str = f'({", ".join(dispatch_args)},)'
 
     def check(arguments, wrong=operator.ne, msg=""):
         """Make sure one passes the expected number of arguments"""
@@ -405,7 +405,7 @@ def dispatch_on(*dispatch_args):
         # first check the dispatch arguments
         argset = set(getfullargspec(func).args)
         if not set(dispatch_args) <= argset:
-            raise NameError("Unknown dispatch arguments %s" % dispatch_str)
+            raise NameError(f"Unknown dispatch arguments {dispatch_str}")
 
         typemap = {}
 
@@ -446,7 +446,7 @@ def dispatch_on(*dispatch_args):
             check(types)
 
             def dec(f):
-                check(getfullargspec(f).args, operator.lt, " in " + f.__name__)
+                check(getfullargspec(f).args, operator.lt, f" in {f.__name__}")
                 typemap[types] = f
                 return f
 
@@ -493,5 +493,5 @@ def dispatch_on(*dispatch_args):
             __wrapped__=func,
         )
 
-    gen_func_dec.__name__ = "dispatch_on" + dispatch_str
+    gen_func_dec.__name__ = f"dispatch_on{dispatch_str}"
     return gen_func_dec
