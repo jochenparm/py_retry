@@ -40,8 +40,7 @@ def test_tries_inf():
         hit[0] += 1
         if hit[0] == target:
             return target
-        else:
-            raise ValueError
+        raise ValueError
 
     assert f() == target
 
@@ -55,8 +54,7 @@ def test_tries_minus1():
         hit[0] += 1
         if hit[0] == target:
             return target
-        else:
-            raise ValueError
+        raise ValueError
 
     assert f() == target
 
@@ -140,8 +138,7 @@ def test_retry_call_with_args():
     def f(value=0):
         if value < 0:
             return value
-        else:
-            raise RuntimeError
+        raise RuntimeError
 
     return_value = -1
     result = None
@@ -159,8 +156,7 @@ def test_retry_call_with_kwargs():
     def f(value=0):
         if value < 0:
             return value
-        else:
-            raise RuntimeError
+        raise RuntimeError
 
     kwargs = {"value": -1}
     result = None
