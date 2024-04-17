@@ -20,7 +20,7 @@ def __retry_internal(
     backoff: int = 1,
     jitter: Union[int, float, tuple[Union[int, float], Union[int, float]]] = 0,
     logger: Optional[logging.Logger] = logging_logger,
-) -> Optional[Callable]:
+) -> Any:
     """
     Executes a function and retries it if it failed.
 
