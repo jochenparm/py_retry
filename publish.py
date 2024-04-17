@@ -10,7 +10,7 @@ import toml
 
 PROJECT_ROOT = dirname(realpath(__file__))
 
-with open(Path(PROJECT_ROOT) / "pyproject.toml", "r") as f_read:
+with open(Path(PROJECT_ROOT) / "pyproject.toml") as f_read:
     content = toml.load(f_read)
     __version__ = content["tool"]["poetry"]["version"]
 
@@ -18,7 +18,7 @@ with open(Path(PROJECT_ROOT) / "pyproject.toml", "r") as f_read:
 class UploadCommand:
     @staticmethod
     def status(s):
-        print("✨✨ {0}".format(s))
+        print(f"✨✨ {s}")
 
     def initialize_options(self):
         pass
@@ -29,7 +29,7 @@ class UploadCommand:
     def git_commit_main(self) -> int:
         self.status("Pushing git commits...")
         os.system("git add .")
-        os.system('git commit -m "{0}"'.format(__version__))
+        os.system(f'git commit -m "{__version__}"')
         return os.system("git push origin main")
 
     def run(self):
@@ -53,7 +53,7 @@ class UploadCommand:
                 os.system(
                     'git tag -a v{0} -m "release version v{0}"'.format(__version__)
                 )
-                os.system("git push origin v{0}".format(__version__))
+                os.system(f"git push origin v{__version__}")
 
         sys.exit()
 
