@@ -58,6 +58,6 @@ class UploadCommand:
         sys.exit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     uc = UploadCommand()
     uc.run()

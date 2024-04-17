@@ -17,7 +17,7 @@ platform darwin -- Python 3.10.12, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /Use
 cachedir: .pytest_cache
 rootdir: /Users/dapeng/Desktop/code/Git/PyRetry
 plugins: anyio-3.7.1
-collected 9 items                                                                                                                                                       
+collected 9 items
 
 tests/test_retry.py::test_retry PASSED                                                                                                                            [ 11%]
 tests/test_retry.py::test_tries_inf PASSED                                                                                                                        [ 22%]
@@ -110,14 +110,14 @@ if __name__ == '__main__':
 
 ```python
 def retry_call(
-	f, 
-	fargs=None, 
-	fkwargs=None, 
-	exceptions=Exception, 
-	tries=-1, 
-	delay=0, 
-	max_delay=None, 
-	backoff=1, 
+	f,
+	fargs=None,
+	fkwargs=None,
+	exceptions=Exception,
+	tries=-1,
+	delay=0,
+	max_delay=None,
+	backoff=1,
 	jitter=0,
 	logger=logging_logger
 ):
