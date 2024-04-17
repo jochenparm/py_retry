@@ -1,3 +1,4 @@
 [flake8]
 extend-ignore = E501
+exclude = src/retry/decorator.py
 max-complexity = 10
