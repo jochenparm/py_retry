@@ -2,7 +2,7 @@ import logging
 import random
 import time
 from functools import partial
-from typing import Any, Callable, NewType, Optional, Tuple, TypeVar, Union
+from typing import Any, Callable, NewType, Optional, TypeVar, Union
 
 from .compat import decorator
 
