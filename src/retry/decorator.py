@@ -32,12 +32,13 @@ Decorator module, see
 https://github.com/micheles/decorator/blob/master/docs/documentation.md
 for the documentation.
 """
+
 import inspect
 import itertools
 import operator
 import re
 import sys
-from contextlib import _GeneratorContextManager
+from contextlib import _GeneratorContextManager, suppress
 from inspect import getfullargspec, iscoroutinefunction, isgeneratorfunction
 
 __version__ = "5.1.1"
@@ -266,26 +267,16 @@ def decorate(func, caller, extras=(), kwsyntax=False):
     fun.__signature__ = sig
     fun.__qualname__ = func.__qualname__
     # builtin functions like defaultdict.__setitem__ lack many attributes
-    try:
+    with suppress(AttributeError):
         fun.__defaults__ = func.__defaults__
-    except AttributeError:
-        pass
-    try:
+    with suppress(AttributeError):
         fun.__kwdefaults__ = func.__kwdefaults__
-    except AttributeError:
-        pass
-    try:
+    with suppress(AttributeError):
         fun.__annotations__ = func.__annotations__
-    except AttributeError:
-        pass
-    try:
+    with suppress(AttributeError):
         fun.__module__ = func.__module__
-    except AttributeError:
-        pass
-    try:
+    with suppress(AttributeError):
         fun.__dict__.update(func.__dict__)
-    except AttributeError:
-        pass
     return fun
 
 
