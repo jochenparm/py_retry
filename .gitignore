@@ -1,4 +1,4 @@
 .pytest_cache
 dist
 poetry.lock
-__pycache__/*
+**/__pycache__/*
