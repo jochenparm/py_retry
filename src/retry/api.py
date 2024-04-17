@@ -82,8 +82,8 @@ def retry(
 
     @decorator
     def retry_decorator(f: Callable, *f_args, **f_kwargs):
-        args = f_args if f_args else []
-        kwargs = f_kwargs if f_kwargs else {}
+        args = f_args or []
+        kwargs = f_kwargs or {}
         return __retry_internal(
             partial(f, *args, **kwargs),
             exceptions,
@@ -127,8 +127,8 @@ def retry_call(
                     default: retry.logging_logger. if None, logging is disabled.
     :returns: the result of the f function.
     """
-    args = f_args if f_args else []
-    kwargs = f_kwargs if f_kwargs else {}
+    args = f_args or []
+    kwargs = f_kwargs or {}
     return __retry_internal(
         partial(f, *args, **kwargs),
         exceptions,
